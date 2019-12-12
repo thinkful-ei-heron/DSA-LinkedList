@@ -157,8 +157,18 @@ function isEmpty(llist) {
 function findPrevious(llist, node) {
   let currNode = llist.head;
   let previousNode = llist.head;
-  let stepper = 0;
-  while (stepper < node - 1) {
+  let stepper = 1;
+
+  if(node <= 0) {
+    console.log('Node must be greater than 0');
+    return;
+  }
+
+  while (stepper < node) {
+    if(currNode === null) {
+      console.log('Boundary error');
+      return;
+    }
     stepper++;
     previousNode = currNode;
     currNode = currNode.next;
@@ -203,8 +213,8 @@ function main() {
   display(SLL);
   size(SLL);
   isEmpty(SLL);
-  findPrevious(SLL, 4);
-  findPrevious(SLL, 0);
+  findPrevious(SLL, -19);
+  findPrevious(SLL, 1);
   findPrevious(SLL, 9);
   findLast(SLL);
 }
