@@ -121,12 +121,68 @@ class LinkedList {
       return;
     }
     if(stepper === pos){
-      this.insertBefore(newItem, currNode.value);
+      this.insertAfter(newItem, currNode.value);
       return;
     }
   }
 }
 
+function display(llist) {
+  let currNode = llist.head;
+  while(currNode !== null) {
+    console.log(currNode.value);
+    currNode = currNode.next;
+  }
+}
+
+function size(llist) {
+  let currNode = llist.head;
+  let counter = 0;
+  while(currNode !== null) {
+    currNode = currNode.next;
+    counter++;
+  }
+  console.log('This list has ' + counter + ' items');
+}
+
+function isEmpty(llist) {
+  let currNode = llist.head;
+  if(currNode === null) {
+    console.log('This list is empty');
+  } else {
+    console.log('This list is not empty');
+  }
+}
+
+function findPrevious(llist, node) {
+  let currNode = llist.head;
+  let previousNode = llist.head;
+  let stepper = 0;
+  while (stepper < node - 1) {
+    stepper++;
+    previousNode = currNode;
+    currNode = currNode.next;
+  }
+  if (previousNode === null || node === 0) {
+    console.log('Item not found');
+    return;
+  }
+  console.log(previousNode.value);
+  return;
+}
+
+function findLast(llist) {
+  if(llist.head === null) {
+    console.log('Linked list does not exist');
+    return;
+  }
+  let currNode = llist.head;
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+  }
+  console.log(currNode.value);
+  return;
+}
 
 
 
@@ -144,7 +200,13 @@ function main() {
   SLL.insertAfter('Hotdog', 'Helo');
   SLL.insertAt('Kat', 3);
   SLL.remove('Tauhida');
-
+  display(SLL);
+  size(SLL);
+  isEmpty(SLL);
+  findPrevious(SLL, 4);
+  findPrevious(SLL, 0);
+  findPrevious(SLL, 9);
+  findLast(SLL);
 }
 
 console.log(main());
