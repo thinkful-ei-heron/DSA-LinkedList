@@ -109,10 +109,10 @@ class LinkedList {
     let newNode = new _Node(newItem, currNode.next);
     currNode.next = newNode;
   }
-  insertAt(newItem, pos){
+  insertAt(newItem, pos) {
     let stepper = 0;
     let currNode = this.head;
-    while (stepper !== pos){
+    while (stepper !== pos) {
       stepper++;
       currNode = this.head.next;
     }
@@ -120,7 +120,7 @@ class LinkedList {
       console.log('Item not found');
       return;
     }
-    if(stepper === pos){
+    if (stepper === pos) {
       this.insertAfter(newItem, currNode.value);
       return;
     }
@@ -129,7 +129,7 @@ class LinkedList {
 
 function display(llist) {
   let currNode = llist.head;
-  while(currNode !== null) {
+  while (currNode !== null) {
     console.log(currNode.value);
     currNode = currNode.next;
   }
@@ -138,7 +138,7 @@ function display(llist) {
 function size(llist) {
   let currNode = llist.head;
   let counter = 0;
-  while(currNode !== null) {
+  while (currNode !== null) {
     currNode = currNode.next;
     counter++;
   }
@@ -147,7 +147,7 @@ function size(llist) {
 
 function isEmpty(llist) {
   let currNode = llist.head;
-  if(currNode === null) {
+  if (currNode === null) {
     console.log('This list is empty');
   } else {
     console.log('This list is not empty');
@@ -159,13 +159,13 @@ function findPrevious(llist, node) {
   let previousNode = llist.head;
   let stepper = 1;
 
-  if(node <= 0) {
+  if (node <= 0) {
     console.log('Node must be greater than 0');
     return;
   }
 
   while (stepper < node) {
-    if(currNode === null) {
+    if (currNode === null) {
       console.log('Boundary error');
       return;
     }
@@ -182,7 +182,7 @@ function findPrevious(llist, node) {
 }
 
 function findLast(llist) {
-  if(llist.head === null) {
+  if (llist.head === null) {
     console.log('Linked list does not exist');
     return;
   }
@@ -192,6 +192,26 @@ function findLast(llist) {
   }
   console.log(currNode.value);
   return;
+}
+
+function reverseListIter(lls) {
+  if (lls.head === null) {
+    console.log('Linked list contains no values');
+    return;
+  }
+
+  let currNode = lls.head;
+  let prevNode = null;
+  let tempNode = currNode;
+
+  while(currNode !== null){
+    tempNode = currNode.next;
+    currNode.next = prevNode;
+    prevNode = currNode;
+    currNode = tempNode;
+  }
+  lls.head = prevNode;
+  return display(lls);
 }
 
 
@@ -205,18 +225,28 @@ function main() {
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
-  SLL.remove('squirrel');
+  //SLL.remove('squirrel');
   SLL.insertBefore('Athena', 'Boomer');
   SLL.insertAfter('Hotdog', 'Helo');
   SLL.insertAt('Kat', 3);
-  SLL.remove('Tauhida');
-  display(SLL);
-  size(SLL);
-  isEmpty(SLL);
-  findPrevious(SLL, -19);
-  findPrevious(SLL, 1);
-  findPrevious(SLL, 9);
-  findLast(SLL);
+  //SLL.remove('Tauhida');
+  //display(SLL);
+  // size(SLL);
+  // isEmpty(SLL);
+  // findPrevious(SLL, -19);
+  // findPrevious(SLL, 1);
+  // findPrevious(SLL, 9);
+  // findLast(SLL);
+  reverseListIter(SLL);
 }
 
 console.log(main());
+
+
+
+// Drill 4. Mystery Program
+// This program looks for repeating items and then removes the duplicates.
+
+
+
+
