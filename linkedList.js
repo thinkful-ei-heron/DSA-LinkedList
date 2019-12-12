@@ -24,6 +24,21 @@ class LinkedList {
       tempNode.next = new _Node(item, null);
     }
   }
+  insertCycle(newItem, nextItem) {
+    console.log('entering cycle entry');
+    let currNode = this.head;
+    let previousNode = this.head;
+    let prevPrevNode = this.head;
+
+    while((currNode !== null) && (currNode.value !== nextItem)) {
+      prevPrevNode = previousNode;
+      previousNode = currNode;
+      currNode = currNode.next;
+    }
+
+    let newNode = new _Node(newItem, prevPrevNode);
+    previousNode.next = newNode;
+  }
   find(item) {
     let currNode = this.head;
     if (!this.head) {
@@ -214,21 +229,84 @@ function reverseListIter(lls) {
   return display(lls);
 }
 
+function thirdFromEnd(list) {
+  if(list.head === null) {
+    console.log('List is empty :(');
+    return;
+  }
+
+  let currNode = list.head;
+  let prevNode = null;
+  let prevPrevNode = null;
+
+  while(currNode.next !== null) {
+    prevPrevNode = prevNode; 
+    prevNode = currNode;
+    currNode = currNode.next;
+  }
+  if(prevPrevNode === null) {
+    console.log('List isn\'t long enough!');
+    return;
+  }
+  console.log(prevPrevNode.value +' is the 3rd from the end!');
+  return prevPrevNode.value;
+}
+
+function middleOfList(list) {
+  if(list.head === null) {
+    console.log('List is empty');
+    return;
+  }
+
+  let currNode = list.head;
+  let stepper = 1;
+  while(currNode.next !== null) {
+    currNode = currNode.next;
+    stepper++;
+  }
+  console.log(stepper);
+  let middle = Math.ceil(stepper/2);
+  console.log(middle);
+  stepper = 1;
+  currNode = list.head;
+  while(stepper < middle) {
+    stepper++;
+    currNode = currNode.next;
+  }
+  console.log(currNode.value);
+  return currNode;
+}
+
+function cycleFinder(list) {
+  let slowNode = list.head;
+  let fastNode = list.head;
+
+  while(slowNode.next && slowNode) {
+    slowNode = slowNode.next;
+    fastNode = fastNode.next.next;
+    if(slowNode === fastNode) {
+      console.log('CYCLE!');
+      return true;
+    }
+  }
+}
+
 
 
 function main() {
-  let SLL = new LinkedList();
+  // let SLL = new LinkedList();
+  let CycleList = new LinkedList();
 
-  SLL.insertFirst('Apollo');
-  SLL.insertLast('Boomer');
-  SLL.insertLast('Helo');
-  SLL.insertLast('Husker');
-  SLL.insertLast('Starbuck');
-  SLL.insertLast('Tauhida');
+  // SLL.insertFirst('Apollo');
+  // SLL.insertLast('Boomer');
+  // SLL.insertLast('Helo');
+  // SLL.insertLast('Husker');
+  // SLL.insertLast('Starbuck');
+  // SLL.insertLast('Tauhida');
   //SLL.remove('squirrel');
-  SLL.insertBefore('Athena', 'Boomer');
-  SLL.insertAfter('Hotdog', 'Helo');
-  SLL.insertAt('Kat', 3);
+  // SLL.insertBefore('Athena', 'Boomer');
+  // SLL.insertAfter('Hotdog', 'Helo');
+  // SLL.insertAt('Kat', 3);
   //SLL.remove('Tauhida');
   //display(SLL);
   // size(SLL);
@@ -237,7 +315,22 @@ function main() {
   // findPrevious(SLL, 1);
   // findPrevious(SLL, 9);
   // findLast(SLL);
-  reverseListIter(SLL);
+  // reverseListIter(SLL);
+  // display(SLL);
+  // thirdFromEnd(SLL);
+  // middleOfList(SLL);
+  CycleList.insertFirst(1);
+  CycleList.insertLast(2);
+  CycleList.insertLast(3);
+  CycleList.insertLast(4);
+  CycleList.insertLast(5);
+  CycleList.insertLast(6);
+  CycleList.insertCycle(7);
+  // CycleList.insertLast(8);
+  // CycleList.insertLast(9);
+  // CycleList.insertLast(10);
+  cycleFinder(CycleList);
+
 }
 
 console.log(main());
