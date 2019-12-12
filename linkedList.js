@@ -104,7 +104,7 @@ function main() {
     SLL.insertLast('Tauhida');
     SLL.remove('squirrel');
     SLL.insertBefore('Athena', 'Starbuck');
-    return SLL.find('Husker');
+    
 }
 
 console.log(main());
